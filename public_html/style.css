@@ -1,0 +1,164 @@
+/*
+    Jacob's Wacky World homepage
+
+    Since: December 16th, 2022
+    By: Jacob Applebaum
+*/
+/* FONTS */
+
+@font-face {
+    font-family: "Liberation Sans";
+    src: url(fonts/LiberationSans-Regular.ttf);
+}
+@font-face {
+    font-family: "Liberation Sans";
+    src: url(fonts/LiberationSans-Bold.ttf);
+    font-weight: bold;
+}
+
+/* GENERAL */
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    font-family: "Liberation Sans";
+}
+
+html {
+    background-image: url("images/jacob.jpg");
+}
+
+body {
+    display: grid;
+    grid-template: auto 1fr auto / 1fr auto;
+
+    background-color: white;
+    margin: 10px;
+}
+
+/* HEADER */
+
+header {
+    grid-column: 1 / 4;
+}
+
+header img#banner { 
+    display: block;
+    width: 100%;
+}
+
+header table {
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+header td {
+    width: 20%;
+    text-align: center;
+    white-space: nowrap;
+}
+
+header td button { 
+    width: 100%;
+    display: block;
+    padding: 0.5em;
+    font-size: 1em;
+
+    border: none;
+    color: black;
+    text-decoration: none;
+    text-overflow: ellipsis;
+}
+
+header td button:hover { 
+    box-shadow: inset 0 0 10px 5px black;
+}
+
+header #nav td:nth-of-type(1) button { background-color: #E31D98; }
+header #nav td:nth-of-type(2) button { background-color: #E31D1D; }
+header #nav td:nth-of-type(3) button { background-color: #FC8D0C; }
+header #nav td:nth-of-type(4) button { background-color: #EDF145; }
+header #nav td:nth-of-type(5) button { background-color: #4CF18D; }
+
+/* MAIN(S) */
+
+main {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+    float: left;
+    clear: left;
+    padding: 1rem;
+    box-shadow: inset 0 5px 5px grey;
+}
+
+#projects table { width: calc(100% - 1rem); }
+#projects td { padding: 10px; }
+#projects img { width: 100%; }
+
+#about-me img { width: 100%; }
+
+/* RIGHT */
+
+#right { 
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    background-color: lightgrey;
+    box-shadow: inset 0 5px 5px grey;
+}
+
+#right #buttons > * { margin: 25px; }
+#right #loginform form,
+#right #signupform form { margin: 15px; }
+
+#right #loginform form .submit,
+#right #signupform form .submit { padding: 5px; }
+
+button.bigb {
+    display: block;
+    padding: 20px;
+    width: calc(100% - 50px);
+
+    background-color: blue;
+    box-shadow: 0 0 10px 5px black;
+    border: none;
+    border-radius: 20px;
+    font-size: 30px;
+    font-family: sans-serif;
+    color: white;
+}
+button.bigb:hover { box-shadow: 0 0 10px 1px black; }
+
+button.smallb {
+    margin: 10px;
+}
+
+/* FOOTER */
+
+footer {
+    grid-column: 1 / 4;
+    grid-row: 3 / 4;
+    background-color: lightgrey;
+    box-shadow: inset 0 10px 10px grey;
+}
+
+/* RESPONSIVENESS */
+
+@media screen and (max-width: 600px) {
+    body { grid-template: auto auto 1fr auto / 1fr; }
+    header,main,#right,footer { grid-column: 1 / 2; }
+    #right { grid-row: 2 / 3; }
+    main   { grid-row: 3 / 4; }
+    footer { grid-row: 4 / 5; }
+
+    #buttons > * { margin: 15px; width: calc(50% - 30px); float: left; }
+}
+@media screen and (min-width: 1300px) {
+    body { width: 1280px; margin: 10px auto 10px auto; }
+}
+
+/* OTHER */
+
+li { 
+    list-style: inside;
+}
+
