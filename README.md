@@ -1,3 +1,3 @@
-# Jacob's Wacky World source code
+# Jacob's Wacky World 2.0 source code
 
-This is the source code to my website, [jacobswackyworld.ca](https://jacobswackyworld.ca).
+This is going to be the source code to my in-development re-vamped website, Jacob's Wacky World 2.0. [The original (current) jacobswackyworld.ca](https://jacobswackyworld.ca).
