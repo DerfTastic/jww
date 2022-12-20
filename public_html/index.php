@@ -632,7 +632,8 @@ function logAllOut() {
     $db->close();
 }
 
-/* idk lol
+// idk lol
+// but also it is supposed to check if you're locked in.
 $db = new MyDB();
 
 $sql = "SELECT Ticket FROM logged_in;";
@@ -647,7 +648,6 @@ echo "function checkStorage(id) {
 }";
 
 $db->close();
-*/
 
 /*
 
