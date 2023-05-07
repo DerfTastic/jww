@@ -1,0 +1,17 @@
+{
+
+"mandelbrot":{
+    "Name": "Mandelbrot Visualizer",
+    "Date": 2022.1,
+    "Category": "school",
+    "Desc": "Draws the famous Mandelbrot Set fractal to demonstrate recursion in a Java program"
+}
+
+"vgagfxcard":{
+    "Name": "Designing a VGA Graphics Card"
+    "Date": 2022.1
+    "Category": "electronics",
+    "Desc": "I built an functioning graphics card using TTL chips on several breadboards, then designed a custom PCB for it."
+}
+
+}

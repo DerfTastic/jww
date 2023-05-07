@@ -96,8 +96,11 @@ main {
 }
 
 #projects table { width: calc(100% - 1rem); }
+
 #projects img { width: 100%; }
+
 #projects a { text-decoration: none; }
+
 #projects article { 
     display: grid;
     grid-template-areas:
@@ -112,16 +115,21 @@ main {
     background-color: black;
     padding: 10px;
     border-radius: 15px;
-    border-style: outset;
-    border-width: 5px;
-    border-color: grey darkgrey;
+    border: 5px solid darkblue;
+    margin: 5px auto 10px auto;
 }
+#projects article:hover { 
+    background-color: #000042; 
+    text-shadow: 3px 3px 2px black;
+}
+
 #projects article #text {
     grid-area: text;
 }
+
 #projects article #text h2 {
     font-family: Comic Sans MS;
-    line-height: 1;
+    line-height: 1.5;
     margin: 0px;
     font-size: 32px;
     letter-spacing: 0.039em;
@@ -134,6 +142,7 @@ main {
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
 }
+
 #projects article #text p { padding-left: 0.1em;
     overflow: hidden;
     text-overflow: clip ellipsis;
@@ -141,17 +150,20 @@ main {
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
 }
+
 #projects article img {
     grid-area: img;
     height: 100%;
     object-fit: cover;
 }
+
 #projects article #date { 
     grid-area: date;
     background-color: darkblue;
     margin: 0 auto 0 0;
     height: fit-content;
 }
+
 #projects article #date p { margin: 0.5em; }
 
 #about-me img { width: 100%; }
