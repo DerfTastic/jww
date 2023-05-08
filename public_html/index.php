@@ -67,7 +67,7 @@
             <li>Assembly Programming</li>
             <li>Computer Graphics</li>
             <li>Electronics</li>
-            <li>Hardware Design</li>
+            <li>Hardware Design and HDLs</li>
             <li>Game Programming</li>
             <li>Web Development</li>
             <li>FPGAs</li>
@@ -77,17 +77,21 @@
     <main id="projects" hidden>
 
         <h1 name="top">Projects</h1>
-        <p>Here are some projects I've made</p>
+        <h3><u>Sort by:</u></h3>
+        <button>Date</button>
+        <button>Topic</button>
+        <br>
 
 <?php
-error_reporting(E_ERROR|E_PARSE);
+/* error_reporting(E_ERROR|E_PARSE); */
+error_reporting(E_ALL);
 
 $plfile = fopen("data/proj-list.json", "r") or die("Unable to open the list of projects... ask jakey how he broke the site this time");
 $json = fread($plfile, filesize("data/proj-list.json"));
 $obj = json_decode($json, true);
 
 foreach($obj as $id => $article) {
-    echo "<a href=\"/\"><article>";
+    echo "<div id=\"".$id."\" class=\"".$article["Category"]."\" data-category=\"".$article["Category"]."\" data-date=\"".$article["Date"]."\"><a href=\"/\"><article>";
     echo "<div id=\"text\">";
         echo "<h2>".$article["Name"]."</h2>";
         echo "<p>" .$article["Desc"]."</p>";
@@ -96,7 +100,7 @@ foreach($obj as $id => $article) {
 
     $datestr = getDateStr($article["Date"]);
     echo "<div id=date><p>".$datestr."</p></div>";
-    echo "</article></a>";
+    echo "</article></a></div>";
 }
 
 fclose($plfile);

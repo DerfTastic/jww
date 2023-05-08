@@ -1,5 +1,33 @@
 {
 
+"vgagfxcard":{
+    "Name": "Designing a VGA Graphics Card",
+    "Date": "2022.1",
+    "Category": "electronics",
+    "Desc": "I built a functioning graphics card using TTL chips on several breadboards, then designed a custom PCB for it. Based off Ben Eater's video card."
+},
+
+"6502bbcomputer":{
+    "Name": "6502 Breadboard Computer",
+    "Date": "2019.3",
+    "Category": "electronics",
+    "Desc": "Here I built the BE6502 computer on breadboards and interfaced my VGA graphics card to it to make some low-level graphical programs. Based off Ben Eater's 6502 computer."
+},
+
+"8bitcpu":{
+    "Name": "8-bit CPU on Breadboards",
+    "Date": "2022.3",
+    "Category": "electronics",
+    "Desc": "I've started building an 8-bit CPU using TTL chips and breadboards based off the SAP-1 in the book \"Digital Computer Electronics\" by Albert Paul Malvino."
+},
+
+"bbgameconsole":{
+    "Name": "Portable Game Console on a Breadboard",
+    "Date": "2019.3",
+    "Category": "school",
+    "Desc": "Includes a 128x64 Monochrome display, Joystick, Piezo speaker, and buttons connected to an Arduino Uno to play a Space Invaders clone."
+},
+
 "mandelbrot":{
     "Name": "Mandelbrot Visualizer",
     "Date": "2022.1",
@@ -7,11 +35,11 @@
     "Desc": "Draws the famous Mandelbrot Set fractal to demonstrate recursion in a Java program"
 },
 
-"vgagfxcard":{
-    "Name": "Designing a VGA Graphics Card",
-    "Date": "2022.1",
-    "Category": "electronics",
-    "Desc": "I built an functioning graphics card using TTL chips on several breadboards, then designed a custom PCB for it."
+"pcbetching":{
+    "Name": "\"Dipping\" my toes in PCB etching",
+    "Date": "2023.1",
+    "Category": "science",
+    "Desc": "I tried my hand at chemically manufacturing my own PCB by using Ferric Chloride to etch away unmarked areas of a copper board, leaving copper traces as wires."
 }
 
 }
