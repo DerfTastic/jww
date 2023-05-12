@@ -19,6 +19,40 @@
     <link rel="stylesheet" href="style.css" type="text/css"/>
     <link rel="icon" type="image/x-icon" href="favicon.ico"/>
 
+    <script>
+    function dateCMP(a, b) {
+        if (a.dataset.date < b.dataset.date)
+            return -1;
+        if (a.dataset.date > b.dataset.date)
+            return 1;
+        return 0;
+    }
+
+    function categoryCMP(a, b) {
+        var result = a.dataset.category.localeCompare(b.dataset.category);
+        console.log(a.dataset.category + " > " + b.dataset.category + " ?: " + result);
+        return result;
+    }
+      
+    function sortBy(attr) {
+        var indexes = document.querySelectorAll("[data-" + attr + "]");
+        var indexesArray = Array.from(indexes);
+        var sorted;
+        switch (attr) {
+        case 'date': sorted = indexesArray.sort(dateCMP); break;
+        case 'category': sorted = indexesArray.sort(categoryCMP); break;
+        }
+        sorted.forEach(e =>
+            document.querySelector("#list").appendChild(e));
+    }
+
+    function menuUpdate() {
+        console.log(document.getElementById("sortmenu").value);
+        sortBy(document.getElementById("sortmenu").value);
+    }
+    </script>
+        
+
 </head>
 
 <body>
@@ -77,10 +111,22 @@
     <main id="projects" hidden>
 
         <h1 name="top">Projects</h1>
-        <h3><u>Sort by:</u></h3>
-        <button>Date</button>
-        <button>Topic</button>
+        <h3>Sort by:
+        <form onchange="menuUpdate()" style="display: inline;">
+          <select name="sortBy" id="sortmenu">
+            <option value="featured">Featured Order</option>
+            <option value="date">Date</option>
+            <option value="category">Category</option>
+          </select>
+        </form>
+        <!--
+        <button onclick="sortBy('date')">Date</button>
+        <button onclick="sortBy('category')">Category</button>
+        -->
+        </h3>
         <br>
+
+        <div id="list">
 
 <?php
 /* error_reporting(E_ERROR|E_PARSE); */
@@ -176,9 +222,8 @@ function getDateStr($datestr) {
 }
 
 ?>
+        </div>
 
-        <p>blah blah blah blah blah </p>
-        
         <table align="center" cellpadding="10px">
             <tr>
                 <th colspan="3" bgcolor="#00B000">School Assignments</th>
