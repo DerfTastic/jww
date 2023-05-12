@@ -104,16 +104,16 @@ main {
 #projects article { 
 display: grid;
          grid-template-areas:
-             "text img"
-             "date img";
-         grid-template-columns: 1fr 30%;
+             "cat text img"
+             "cat date img";
+         grid-template-columns: 2em 1fr 30%;
          grid-template-rows: 1fr auto;
 
 width: calc(100% - 1rem);
 height: auto;
 color: white;
        background-color: black;
-padding: 10px;
+padding: 0 10px 0 0;
          border-radius: 15px;
 border: 5px solid darkgrey;
 margin: 5px auto 10px auto;
@@ -127,24 +127,43 @@ margin: 5px auto 10px auto;
 #projects article #date { 
     grid-area: date;
     background-color: darkgrey;
-margin: 0 auto 0 0;
-height: fit-content;
+    margin: 0 auto 10px 10px;
+    height: fit-content;
 }
 
-#projects div.school article        { border: 5px solid darkblue; }
-#projects div.electronics article   { border: 5px solid darkgreen; }
-#projects div.science article       { border: 5px solid #d9a323; }
+#projects article #cat {
+    grid-area: cat;
+    writing-mode: vertical-lr;
+    text-orientation: mixed;
+    text-align: center;
+    font-size: 1.5em;
+}
+
+:root {
+    --school-color:         darkblue;
+    --electronics-color:    darkgreen;
+    --science-color:        #d9a323;
+}
+
+#projects div.school article        { border: 5px solid var(--school-color); }
+#projects div.electronics article   { border: 5px solid var(--electronics-color); }
+#projects div.science article       { border: 5px solid var(--science-color); }
 
 #projects div.school article:hover      { background-color: #000052; }
 #projects div.electronics article:hover { background-color: #003200; }
 #projects div.science article:hover     { background-color: #323200; }
 
-#projects div.school #date      { background-color: darkblue; }
-#projects div.electronics #date { background-color: darkgreen; }
-#projects div.science #date     { background-color: #9d8937; }
+#projects div.school #date,
+#projects div.school #cat      { background-color: var(--school-color); }
+#projects div.electronics #date,
+#projects div.electronics #cat { background-color: var(--electronics-color); }
+#projects div.science #date,
+#projects div.science #cat     { background-color: var(--science-color); }
 
 #projects article #text {
     grid-area: text;
+    margin-top: 10px;
+    margin-left: 10px;
 }
 
 #projects article #text h2 {
@@ -176,6 +195,8 @@ display: -webkit-box;
     box-sizing: content-box;
     height: 10em;
     object-fit: cover;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 #projects article #date p { margin: 0.5em; }

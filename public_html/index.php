@@ -20,7 +20,7 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico"/>
 
     <script>
-    function dateCMP(a, b) {
+    function dateACMP(a, b) {
         if (a.dataset.date < b.dataset.date)
             return -1;
         if (a.dataset.date > b.dataset.date)
@@ -28,27 +28,51 @@
         return 0;
     }
 
+    function dateDCMP(a, b) {
+        if (a.dataset.date < b.dataset.date)
+            return 1;
+        if (a.dataset.date > b.dataset.date)
+            return -1;
+        return 0;
+    }
+
     function categoryCMP(a, b) {
         var result = a.dataset.category.localeCompare(b.dataset.category);
-        console.log(a.dataset.category + " > " + b.dataset.category + " ?: " + result);
+        // console.log(a.dataset.category + " > " + b.dataset.category + " ?: " + result);
         return result;
     }
       
-    function sortBy(attr) {
+    function sortBy(attr, order = 0) {
         var indexes = document.querySelectorAll("[data-" + attr + "]");
         var indexesArray = Array.from(indexes);
         var sorted;
         switch (attr) {
-        case 'date': sorted = indexesArray.sort(dateCMP); break;
-        case 'category': sorted = indexesArray.sort(categoryCMP); break;
+        case 'date': 
+            sorted = indexesArray.sort(order == 0 ? dateACMP : dateDCMP);
+            break;
+        case 'category':
+            sorted = indexesArray.sort(categoryCMP);
+            break;
+        default:
+            console.error("Attribute to sort by is missing");
+            return;
         }
         sorted.forEach(e =>
             document.querySelector("#list").appendChild(e));
+        if (attr === 'category') {
+            for(var 
+        }
     }
 
     function menuUpdate() {
-        console.log(document.getElementById("sortmenu").value);
-        sortBy(document.getElementById("sortmenu").value);
+        var str = document.getElementById("sortmenu").value;
+        var params = str.split(',');
+        if (params.length == 0)
+            sortBy(params);
+        else 
+            sortBy(params[0], params[1]);
+
+        // console.log("Params: " + params);
     }
     </script>
         
@@ -114,15 +138,12 @@
         <h3>Sort by:
         <form onchange="menuUpdate()" style="display: inline;">
           <select name="sortBy" id="sortmenu">
-            <option value="featured">Featured Order</option>
-            <option value="date">Date</option>
+            <option value="featured" hidden selected>None</option>
+            <option value="date,1">Date (newest)</option>
+            <option value="date,0">Date (oldest)</option>
             <option value="category">Category</option>
           </select>
         </form>
-        <!--
-        <button onclick="sortBy('date')">Date</button>
-        <button onclick="sortBy('category')">Category</button>
-        -->
         </h3>
         <br>
 
@@ -138,6 +159,11 @@ $obj = json_decode($json, true);
 
 foreach($obj as $id => $article) {
     echo "<div id=\"".$id."\" class=\"".$article["Category"]."\" data-category=\"".$article["Category"]."\" data-date=\"".$article["Date"]."\"><a href=\"/\"><article>";
+
+    echo "<div id=\"cat\">";
+        echo ucfirst($article["Category"]);
+    echo "</div>";
+
     echo "<div id=\"text\">";
         echo "<h2>".$article["Name"]."</h2>";
         echo "<p>" .$article["Desc"]."</p>";
@@ -224,88 +250,7 @@ function getDateStr($datestr) {
 ?>
         </div>
 
-        <table align="center" cellpadding="10px">
-            <tr>
-                <th colspan="3" bgcolor="#00B000">School Assignments</th>
-            </tr>
-            <tr>
-                <td colspan="3" bgcolor="lightgrey" >
-                    <h4 align="left">Assignment 4 - <a href="/~ja20gp/A4/o8Sdv/login.html">login.html</a> <a href="/~ja20gp/A4/o8Sdv/loginAsync.html">loginAsync.html</a></h4>
-                    <p>This assignment was split up into three parts:</p>
-                    <ul>
-                    <li>Synchronous CGI (login.html)</li>
-                    <li>Asynchronous (loginAsync.html)</li>
-                    <li>Substitution Cypher (loginAsync.html)</li>
-                    </ul>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="3" bgcolor="lightgrey" >
-                    <h4 align="left">Assignment 3 - <a href="/~ja20gp/A3/9oClQ/">index.html</a> <a href="/~ja20gp/A3/9oClQ/form.html">form.html</a></h4>
-                    <p>This assignment was split up into two parts:</p>
-                    <ul>
-                    <li><u>Responsive Design:</u> Making our Assignment 2 webpage responsive, pretty, and interactive. (index.html)</li>
-                    <li><u>Forms:</u> Making a registration form. (form.html)</li>
-                    </ul>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="3" bgcolor="lightgrey" >
-                    <h4 align="left">Assignment 2 - <a href="/~ja20gp/A2/">Link</a></h4>
-                    <p>We were asked to recreate a specific example webpage as closely as possible. I'm just gonna tell you I spent 3+ hours making the image below, mapping out everything, and you'll get an idea of how I went about doing this one.</p>
-                    <img src="images/A2-diagram.png" alt="a super detailed analyzation of the example image">
-                </td>
-            </tr>
-            <tr>
-                <td colspan="3" bgcolor="lightgrey" >
-                    <h4 align="left">Assignment 1 - <a href="/~ja20gp/A1/">Link</a></h4>
-                    <p>We were asked to create a simple personal web site (for the first time) with four pages: Home, Schedule, About Me, and another page (which I chose to make my projects page). The kicker was that we weren't allowed to use ANY JS or even CSS! I'm actually surprised how much I learned you can do to the visual aspect of the site by just using HTML atributes.</p>
-                </td>
-            </tr>
-            <tr>
-                <th colspan="3" bgcolor="#B0B000">Electronics</th>
-            </tr>
-            <tr align="left" valign="top">
-                <td bgcolor="darkgrey" align="left">
-                    <h4 align="center">8-bit Breadboard CPU</h4>
-                    <p>Modules made so far:</p>
-                    <ul>
-                        <li>Clock module</li>
-                        <li>Registers</li>
-                        <li><s>ALU</s></li>
-                        <li><s>Memory</s></li>
-                    </ul>
-                    <img src="images/8bit-CPU.png" alt="image of 8-bit CPU on breadboards"/>
-                </td>
-                <td bgcolor="lightgrey" align="left">
-                    <h4 align="center">Graphics Card on breadboards</h4>
-                    <p>Specs:</p>
-                    <ul>
-                        <li>100x64 Display Resolution</li>
-                        <li>1 frame/second</li>
-                        <li>64 color</li>
-                        <li>71% CPU overhead</li>
-                    </ul>
-                    <img src="images/vga.png" alt="image of a graphics card on breadboards"/>
-                </td>
-                <td bgcolor="darkgrey">
-                    <h4 align="center">6502 Breadboard Computer</h4>
-                    <p>A computer made with a retro CPU used on the:</p>
-                    <ul>
-                        <li>Original Nintendo (NES)/Famicom</li>
-                        <li>Commodore 64/128/VIC-20/PET</li>
-                        <li>Atari 2600/5200/7800</li>
-                        <li>Apple I/II/IIe</li>
-                        <li>BBC Micro/Master</li>
-                        <li>TurboGrafx-16</li>
-                    </ul>
-                    <img src="images/6502.jpg" alt="image of 6502 computer connected to my graphics card on breadboards"/>
-                </td>
-            </tr>
-            <tr>
-                <th colspan="3" bgcolor="#B00000">Programming</th>
-            </tr>
-            <tr>
+        <!-- <tr>
                 <td bgcolor="lightgrey">
                     <h4 align="center"><a href="https://www.jacobswackyworld.ca/games/aaa/ji.jacobswackyworld.ca/index.html">Jacob Invaders</a><h4>
                             <img src="images/jacob-invaders-thumbnail.png" alt="an image of the title screen for jacob invaders"/>
@@ -313,7 +258,7 @@ function getDateStr($datestr) {
             </tr>
                 </td>
             </tr>
-        </table>
+        -->
 
         <br>
         <p><a href="#top">^^ Back to top ^^</a></p>
@@ -488,130 +433,48 @@ function getDateStr($datestr) {
         <button class="smallb" onclick="delete_acc()">Delete Account</button>
     </footer>
 
-<script>
+    <script>
 
-<?php 
+    <?php 
 
-if (!array_key_exists('p', $_GET)) {
-  echo "showMain('home');";
-}
-else {
-  $p = $_GET['p'];
-
-  echo "
-    try {
-      showMain('".$p."')
+    if (!array_key_exists('p', $_GET)) {
+      echo "showMain('home');";
     }
-    catch(err) {
-      console.log(err.message); // Debug
-      showMain('home');
-    }; ";
-}
+    else {
+      $p = $_GET['p'];
 
-?>
-
-const fivechars = new RegExp(/^\w{5,}$/);
-
-// verifies if the input field (given by the "id" parameter) is valid i.e. filled and it might abides by some other condition, depending on which field it is
-// If it's not valid, it won't let the user click the button (given by the "button" parameter)
-function verify(id, button) {
-
-    var value = document.getElementById(id).value;
-    
-    var noticeTag = document.getElementById(id + "Notice");
-
-    var valid; // false = there's an error in this field
-
-    switch (id) {
-        case 'user':
-        case 'pass':
-        case 'SUuser':
-            valid = (value != "");
-            break;
-        case 'SUpass':
-            valid = (value != "") && fivechars.test(value);
-            break;
-        case 'SUconfpass':
-            valid = (value != "") && (document.getElementById("SUpass").value == value);
-            break;
-    }
-
-    if (!valid) {
-        noticeTag.hidden = false;
-        return false;
-    } else {
-        noticeTag.hidden = true;
-        return true;
-    }
-};
-
-// True if at least one of the radio buttons was clicked
-function radioClicked() {
-    radioButtons = document.getElementsByClassName("radiobut");
-    var radioValid = false;
-    for (var i = 0; i < radioButtons.length; i++) {
-        if (radioButtons[i].checked) {
-            radioValid = true;
-            break;
+      echo <<<JS
+        try {
+          showMain("$p");
         }
+        catch(err) {
+          console.error(err.message); // Debug
+          showMain('home');
+        };
+        JS;
     }
-    return radioValid;
-}
 
-function tryUndisablingLogin() {
-    const buttonTag = document.getElementById('loginb');
-    if (verify('user', 'loginb') &&
-        verify('pass', 'loginb') ) {
-        buttonTag.disabled = false;
-    } else { buttonTag.disabled = true; }
-}
+    ?>
 
-function tryUndisablingSignup() {
-    const buttonTag = document.getElementById('signupb');
-    if (verify('SUuser', 'signupb') &&
-        verify('SUpass', 'signupb') &&
-        verify('SUconfpass', 'signupb') &&
-        radioClicked() ) {
-        buttonTag.disabled = false;
-    } else { 
-        buttonTag.disabled = true; }
-}
-
-function showMsg(id, str, color) {
-    document.getElementById(id).style.color = color;
-    document.getElementById(id).innerHTML = str;
-    document.getElementById(id).hidden = false;
-}
-
-function show(id) {
-    document.getElementById(id).hidden = false;
-}
-
-function hide(id) {
-    document.getElementById(id).hidden = true;
-}
-
-/* showMain( String id )
- *    hides all main elements but reveals element with id of parameter id
- */
-function showMain(id) {
-    var mains = document.getElementsByTagName("main");
-    for (var i = 0; i < mains.length; i++) {
-        mains[i].hidden = true;
+    function show(id) {
+        document.getElementById(id).hidden = false;
     }
-    document.getElementById(id).hidden = false;
-}
 
-function showRight(id) {
-    var rightEles = document.getElementById("right").childNodes;
-    for (var i = 0; i < rightEles.length; i++) {
-        rightEles[i].hidden = true;
+    function hide(id) {
+        document.getElementById(id).hidden = true;
     }
-    document.getElementById(id).hidden = false;
-}
 
-</script>
+    /* showMain( String id )
+     *    hides all main elements but reveals element with id of parameter id
+     */
+    function showMain(id) {
+        var mains = document.getElementsByTagName("main");
+        for (var i = 0; i < mains.length; i++) {
+            mains[i].hidden = true;
+        }
+        document.getElementById(id).hidden = false;
+    }
 
+    </script>
 </body>
-
 </html>
