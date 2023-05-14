@@ -60,7 +60,7 @@
         sorted.forEach(e =>
             document.querySelector("#list").appendChild(e));
         if (attr === 'category') {
-            for(var 
+           // idk yet 
         }
     }
 
@@ -95,7 +95,7 @@
                     <button type="submit" name="p" value="projects"> <b>PROJECTS</b> </button>
                 </td>
                 <td>
-                    <button type="submit" name="p" value="courses"> <b>COURSES</b> </button>
+                    <button type="submit" name="p" value="videos"> <b>VIDEOS</b> </button>
                 </td>
                 <td>
                     <button type="submit" name="p" value="about-me"> <b>ABOUT ME</b> </button>
@@ -153,8 +153,8 @@
 /* error_reporting(E_ERROR|E_PARSE); */
 error_reporting(E_ALL);
 
-$plfile = fopen("data/proj-list.json", "r") or die("Unable to open the list of projects... ask jakey how he broke the site this time");
-$json = fread($plfile, filesize("data/proj-list.json"));
+$plfile = fopen("article/proj-list.json", "r") or die("Unable to open the list of projects... ask jakey how he broke the site this time");
+$json = fread($plfile, filesize("article/proj-list.json"));
 $obj = json_decode($json, true);
 
 foreach($obj as $id => $article) {
@@ -264,147 +264,260 @@ function getDateStr($datestr) {
         <p><a href="#top">^^ Back to top ^^</a></p>
     </main> <!-- #projects END -->
 
-    <main id="courses">
-        <h1>Courses</h1>
-        <p><b>My Program:</b> BSc in Computer Science with a Minor in Physics</p>
-        <h2>2nd Year</h2>
-        <ul>
-            <li>COSC 2P03</li>
-            <li>COSC 2P12</li>
-            <li style="color:red;">COSC 2P89</li>
-            <li>MATH 1P12</li>
-            <li>PHYS 1P21</li>
-        </ul>
-        <h2>1st Year</h2>
-        <ul>
-            <li>COSC 1P03</li>
-            <li>MATH 1P67</li>
-            <li>IASC 1P06</li>
-            <li>VISA 1Q98</li>
-            <li>PSYC 1F90</li>
-        </ul>
-        <ul>
-            <li>COSC 1P02</li>
-            <li>COSC 1P50</li>
-            <li>MATH 1P67</li>
-            <li>SCIE 0N90</li>
-            <li>PSYC 1F90</li>
-        </ul>
+    <main id="videos">
 
-        <h1>Schedule</h1>
-        <p>2022-2023 D2 (September 2022 - December 2022)</p>
-
-        <table border="1">
-            <tr bgcolor="lightgrey">
-                <th bgcolor="darkgrey">Time</th> <th>Monday</th> <th>Tuesday</th> <th>Wednesday</th> <th>Thursday</th> <th>Friday</th>
-            </tr>
-            <tr>
-                <td>07:00</td> <td rowspan="6" width="100px"></td> <td rowspan="5" width="100px"></td> <td rowspan="12" width="100px"></td> <td rowspan="2" width=120px></td> <td rowspan="5" width=100px></td> 
-            </tr>
-            <tr>
-                <td>07:30</td>
-            </tr>
-            <tr>
-                <td>08:00</td> <td rowspan="3" align="center" bgcolor="purple">TUT 1<br>PHYS<br>1P21<br>THSOS</td>
-            </tr>
-            <tr>
-                <td>08:30</td>
-            </tr>
-            <tr>
-                <td>09:00</td>
-            </tr>
-            <tr>
-                <td>09:30</td> <td rowspan="3" align="center" bgcolor="aqua">LEC<br>COSC<br>2P03<br>STH203</td> <td rowspan="5"></td> <td rowspan="3" align="center" bgcolor="aqua">LEC<br>COSC<br>2P03<br>STH203</td>
-            </tr>
-            <tr>
-                <td>10:00</td> <td rowspan="4" align="center" bgcolor="orange">LAB<br><a href="https://cosc.brocku.ca/~bockusd/2p12/2p12.html" target="_blank">COSC<br>2P12</a><br>MCD205</td>
-            </tr>
-            <tr>
-                <td>10:30</td>
-            </tr>
-            <tr>
-                <td>11:00</td> <td></td> <td></td>
-            </tr>
-            <tr>
-                <td>11:30</td> <td rowspan="3" align="center" bgcolor="orange">LEC<br><a href="https://cosc.brocku.ca/~bockusd/2p12/2p12.html" target="_blank">COSC<br>2P12</a><br>STH204</td> <td rowspan="3" align="center" bgcolor="orange">LEC<br><a href="https://cosc.brocku.ca/~bockusd/2p12/2p12.html" target="_blank">COSC<br>2P12</a><br>STH204</td>
-            </tr>
-            <tr>
-                <td>12:00</td> <td rowspan="2"></td> <td rowspan="2" align="center" bgcolor="aqua">TUT 2<br>COSC<br>2P03<br>STH203</td>
-            </tr>
-            <tr>
-                <td>12:30</td>
-            </tr>
-            <tr>
-                <td>13:00</td> <td rowspan="2" align="center" bgcolor="purple">LEC<br>PHYS<br>1P21<br>THSOS</td> <td rowspan="7"></td> <td rowspan="2" align="center" bgcolor="purple">LEC<br>PHYS<br>1P21<br>THSOS</td> <td rowspan="2" align="center" bgcolor="purple">LEC<br>PHYS<br>1P21<br>THSOS</td> <td rowspan="7"></td>
-            </tr>
-            <tr>
-                <td>13:30</td>
-            </tr>
-            <tr>
-                <td>14:00</td>  <td></td>  <td rowspan=8></td>  <td></td>
-            </tr>
-            <tr>
-                <td>14:30</td> <td rowspan=3 align="center" bgcolor="red">LEC<br>MATH<br>1P12<br>STH204</td> <td rowspan=3 align="center" bgcolor="red">LEC<br>MATH<br>1P12<br>STH204</td>
-            </tr>
-            <tr>
-                <td>15:00</td>
-            </tr>
-            <tr>
-                <td>15:30</td>
-            </tr>
-            <tr>
-                <td>16:00</td> <td rowspan="4"></td> <td rowspan="17"></td>
-            </tr>
-            <tr>
-                <td>16:30</td> <td rowspan="3" align="center" bgcolor="LIME">LEC<br><a href="https://www.cosc.brocku.ca/archive/offerings/cosc2p89" target="_blank" rel="noopener noreferrer">COSC<br>2P89</a><br>STH204</td> <td rowspan="3" align="center" bgcolor="LIME">LEC<br><a href="https://www.cosc.brocku.ca/archive/offerings/cosc2p89" target="_blank" rel="noopener noreferrer">COSC<br>2P89</a><br>STH204</td> 
-            </tr>
-            <tr>
-                <td>17:00</td>
-            </tr>
-            <tr>
-                <td>17:30</td>
-            </tr>
-            <tr>
-                <td>18:00</td> <td rowspan=4 align="center" bgcolor="LIME">LAB 5<BR><A HREF="HTTPS://WWW.COSC.BROCKU.CA/archive/offerings/cosc2p89" TARGET="_BLANK" REL="NOOPENER NOREFERRER">COSC<br>2P89</A><BR>MCJ310</TD> <td rowspan=13></td> <td rowspan=2 align="center" bgcolor=red>LAB 2<br><a href="https://www.cosc.brocku.ca/archive/offerings/math1p12" target="_blank" rel="noopener noreferrer">MATH<br>1P12</a></td> <td rowspan=13></td> 
-            </tr>
-            <tr>
-                <td>18:30</td>
-            </tr>
-            <tr>
-                <td>19:00</td> <td rowspan=11></td>
-            </tr>
-            <tr>
-                <td>19:30</td>
-            </tr>
-            <tr>
-                <td>20:00</td> <td rowspan=9></td>
-            </tr>
-            <tr>
-                <td>20:30</td>
-            </tr>
-            <tr>
-                <td>21:00</td>
-            </tr>
-            <tr>
-                <td>21:30</td>
-            </tr>
-            <tr>
-                <td>22:00</td>
-            </tr>
-            <tr>
-                <td>22:30</td>
-            </tr>
-            <tr>
-                <td>23:00</td>
-            </tr>
-            <tr>
-                <td>23:30</td>
-            </tr>
-            <tr>
-                <td>24:00</td>
-            </tr>
-        </table>
-    </main> <!-- #courses END -->
+        <p>Welcome to <b>videos</b>! Here you'll find lots of videos I've made since 2016.<br>I mainly use Adobe Premiere and After Effects to create these now.</p>
+        <h3 style="margin: 0em;padding: 0em;"><u>Legend:</u></h3><ul>
+        <li style="padding-bottom: 0.5em;">Videos I made fully by myself have a <span style="background-color: white;padding:5px;border:1px solid black;">white</span> panel.</li>
+        <li style="padding-bottom: 0.5em;">Videos I helped make with other people (but I still did all the editing for) have a <span style="background-color: rgb(161, 255, 246);padding:5px;border:1px solid black;">teal</span> panel.</li>
+        <li style="padding-bottom: 0.5em;">Videos I helped make with other people (editing work was also shared among collaborators) have a <span style="background-color: rgb(255, 190, 255);padding:5px;border:1px solid black;">magenta</span> panel.</li>
+        <li style="padding-bottom: 0.5em;">(All panels, when hovered over, turn <span style="background-color: rgb(150, 255, 150);padding:5px;border:1px solid black;">green</span>)</li>
+        </ul>
+        <h2 class="header">School Videos</h2>
+        <div class = "row">
+            <div class="column">
+                <a class="thumb-title" href="video-webpages/School Videos/09. THE POWER OF JAKERS.html">
+                <div class="content">
+                    <img src="article/videos/thumbnails/THE POWER OF JAKERS.png" alt="THE POWER OF JAKERS Thumbnail" style="width:100%">
+                    <p class="thumb-title"><strong>THE POWER OF JAKERS</strong><br>04.23.2021</p>
+                </div>
+                </a>
+            </div>
+            <div class="column">
+                <a class="thumb-title" href="video-webpages/School Videos/08. 一剪梅.html">
+                <div class="content">
+                    <img src="article/videos/thumbnails/yijianmei.png" alt="一剪梅 Thumbnail" style="width:100%">
+                    <p class="thumb-title"><span class="thumb-title-c2"><strong>一剪梅 | 动力学印刷</strong></span><br>04.05.2021</p>
+                </div>
+                </a>
+            </div>
+            <div class="column">
+                <a class="thumb-title" href="video-webpages/School Videos/07. Forced Success.html">
+                <div class="content">
+                    <img src="article/videos/thumbnails/forced-success.png" alt="Forced Success Thumbnail" style="width:100%">
+                    <p class="thumb-title"><strong>Forced Success</strong><br>02.16.2021</p>
+                </div>
+                </a>
+            </div>
+            <div class="column">
+                <a class="thumb-title" href="video-webpages/School Videos/06. MCV4UP PT 2 Presentation on Derivatives - Copy.html">
+                <div class="content">
+                    <img src="article/videos/thumbnails/calc-2.png" alt="MCV4UP PT #2: Presentation on Derivatives Thumbnail" style="width:100%">
+                    <p class="thumb-title"><strong>MCV4UP PT #2: Presentation on Derivatives</strong><br>01.31.2021</p>
+                </div>
+                </a>
+            </div>
+            <div class="column">
+                <a class="thumb-title" href="video-webpages/School Videos/05. MCV4UP PT 1 Optimization Question.html">
+                <div class="content">
+                    <img src="article/videos/thumbnails/calc-1.png" alt="MCV4UP PT #1: Optimization Question Thumbnail" style="width:100%">
+                    <p class="thumb-title"><strong>MCV4UP PT #1: Optimization Question</strong><br>01.30.2021</p>
+                </div>
+                </a>
+            </div>
+            <div class="column">
+                <a class="thumb-title" href="video-webpages/31. jolly-jaunt.html">
+                <div class="contente">
+                    <img src="article/videos/thumbnails/clean-min.png" alt="A Jolly Jaunt with the Janitor Thumbnail" style="width:100%">
+                    <p class="thumb-title"><span class="thumb-title-c"><strong>用務員遊び | A Jolly Jaunt with the Janitor</strong></span><br>10.10.2019</p>
+                </div>
+                </a>
+            </div>
+            <div class="column">
+                <a class="thumb-title" href="video-webpages/School Videos/04. Billy Madison Scene Re-creation.html">
+                <div class="contente">
+                    <img src="article/videos/thumbnails/billy-madison.png" alt="Billy Madison Scene Re-creation Thumbnail" style="width:100%">
+                    <p class="thumb-title"><strong>Billy Madison Scene Re-creation</strong><br>08.21.2019</p>
+                </div>
+                </a>
+            </div>
+            <div class="column">
+                <a class="thumb-title" href="video-webpages/School Videos/03. The Dramatic Devious Deadly Dump 2.html">
+                <div class="contente">
+                    <img src="article/videos/thumbnails/ddd-dump-2.png" alt="The Dramatic Devious Deadly Dump 2" style="width:100%">
+                    <p class="thumb-title"><strong>The Dramatic Devious Deadly Dump 2</strong><br>06.19.2019</p>
+                </div>
+                </a>
+            </div>
+            <div class="column">
+                <a class="thumb-title" href="video-webpages/Lower-quality-videos/21. The DDD Dump.html">
+                <div class="contente">
+                    <img src="article/videos/thumbnails/Lower-quality-videos/21.png" alt="The Dramatic Devious Deadly Dump" style="width:100%">
+                    <p class="thumb-title"><strong>The Dramatic Devious Deadly Dump</strong><br>03.03.2019</p>
+                </div>
+                </a>
+            </div>
+            <div class="column">
+                <a class="thumb-title" href="video-webpages/School Videos/02. The Opponent of the Rodent.html">
+                <div class="contente">
+                    <img src="article/videos/thumbnails/rodent.png" alt="The Opponent of The Rodent Thumbnail" style="width:100%">
+                    <p class="thumb-title"><strong>The Opponent of the Rodent</strong><br>02.19.2019</p>
+                </div>
+                </a>
+            </div>
+            <div class="column">
+                <a class="thumb-title" href="video-webpages/25. Giuseppe's Operation.html">
+                <div class="contente">
+                    <img src="article/videos/thumbnails/Guiseppe's Operation Video.png" alt="Giuseppe's Operation Thumbnail" style="width:100%">
+                    <p class="thumb-title"><strong>Giuseppe's Operation</strong><br>11.12.2018</p>
+                </div>
+                </a>
+            </div>
+            <div class="column">
+                <a class="thumb-title" href="video-webpages/School Videos/01. The Original Gameboy vs. The Nintendo Switch.html">
+                <div class="content">
+                    <img src="article/videos/thumbnails/gameboy vs. switch.png" alt="The Original Gameboy vs. The Nintendo Switch Thumbnail" style="width:100%">
+                    <p class="thumb-title"><strong>The Original Gameboy vs. The Nintendo Switch</strong><br>04.13.2018</p>
+                </div>
+                </a>
+            </div>
+            <div class="column">
+                <a class="thumb-title" href="video-webpages/Lower-quality-videos/18. Carpooling.html">
+                <div class="contente">
+                    <img src="article/videos/thumbnails/Lower-quality-videos/18.jpg" alt="How Carpooling can reduce your ecological footprint | School Video Thumbnail" style="width:100%">
+                    <p class="thumb-title"><strong>How Carpooling can reduce your ecological footprint | School Video</strong><br>03.28.2018</p>
+                </div>
+                </a>
+            </div>
+        </div>
+        <h2 class="header">Old videos</h2>
+        <div class = "row">
+            <div class="column">
+                <a class="thumb-title" href="video-webpages/16. Cringey-Kids-Trying-To-Be-Funny.html">
+                <div class="contente">
+                    <img src="article/videos/thumbnails/cringey-kids-trying-to-be-funny - Copy.png" alt="Cringey Kids Trying to be Funny Thumbnail" style="width:100%">
+                    <p class="thumb-title"><strong>Cringey Kids Trying to be Funny</strong><br>08.30.2017</p>
+                </div>
+                </a>
+            </div>
+            <div class="column">
+                <a class="thumb-title" href="video-webpages/14. The-Safety-Kids-Club.html">
+                <div class="contente">
+                    <img src="article/videos/thumbnails/the-safety-kids-club-thumbnail - Copy.png" alt="The Safety Kids Club Thumbnail" style="width:100%">
+                    <p class="thumb-title"><strong>The Safety Kids Club</strong><br>08.20.2017</p>
+                </div>
+                </a>
+            </div>
+            <div class="column">
+                <a class="thumb-title" href="video-webpages/09. Playing-old-games-with-ben.html">
+                <div class="contente">
+                    <img src="article/videos/thumbnails/playing-old-games-with-ben-thumbnail - Copy.png" alt="Playing Old Games - With Ben! Thumbnail" style="width:100%">
+                    <p class="thumb-title"><strong>Playing Old Games - With Ben!</strong><br>02.26.2017</p>
+                </div>
+                </a>
+            </div>
+            <div class="column">
+                <a class="thumb-title" href="video-webpages/08. What-the-gamecube-handle-really-does.html">
+                <div class="content">
+                    <img src="article/videos/thumbnails/what-the-gamecube-handle-does-thumbnail - Copy.png" alt="What the Gamecube Handle Really Does Thumbnail" style="width:100%">
+                    <p class="thumb-title"><strong>What the Gamecube Handle Really Does</strong><br>02.06.2017</p>
+                </div>
+                </a>
+            </div>
+            <div class="column">
+                <a class="thumb-title" href="video-webpages/07. Failing at Solving Rubik's Cubes.html">
+                <div class="content">
+                    <img src="article/videos/thumbnails/failing-at-solving-rubiks-cubes-thumbnail.png" alt="Failing at Solving Rubik's Cubes Thumbnail" style="width:100%">
+                    <p class="thumb-title"><strong>Failing at Solving Rubik's Cubes</strong><br>01.27.2017</p>
+                </div>
+                </a>
+            </div>
+            <div class="column">
+                <a class="thumb-title" href="video-webpages/05. The-DS-Curse.html">
+                <div class="content">
+                    <img src="article/videos/thumbnails/the-ds-curse - Copy.png" alt="The DS Curse Thumbnail" style="width:100%">
+                    <p class="thumb-title"><strong>The DS Curse</strong><br>12.19.2016</p>
+                </div>
+                </a>
+            </div>
+            <div class="column">
+                <a class="thumb-title" href="video-webpages/04. Summation-Notation-and-Halloween-Evolution.html">
+                <div class="content">
+                    <img src="article/videos/thumbnails/summation-notation - Copy.png" alt="Summation Notation and Halloween Evolution Thumbnail" style="width:100%">
+                    <p class="thumb-title"><strong>Summation Notation and Halloween Evolution</strong><br>11.22.2016</p>
+                </div>
+                </a>
+            </div>
+            <div class="column">
+                <a class="thumb-title" href="video-webpages/03. My Biased-Thoughts-on-Nintendo.html">
+                <div class="content">
+                    <img src="article/videos/thumbnails/my-biased-thoughts-on-nintendo-thumbnail - Copy.png" alt="My Biased Thoughts on Nintendo Thumbnail" style="width:100%">
+                    <p class="thumb-title"><strong>My Biased Thoughts on Nintendo</strong><br>10.12.2016</p>
+                </div>
+                </a>
+            </div>
+        </div>
+        <h2 class="header">Old and Low-quality videos</h2>
+        <div class = "row">
+            <div class="column">
+                <a class="thumb-title" href="video-webpages/Lower-quality-videos/20. I just cut the cheese.html">
+                <div class="content">
+                    <img src="article/videos/thumbnails/Lower-quality-videos/20.jpg" alt="I just cut the cheese Thumbnail" style="width:100%">
+                    <p class="thumb-title"><strong>I just cut the cheese</strong><br>01.31.2019</p>
+                </div>
+                </a>
+            </div>
+            <div class="column">
+                <a class="thumb-title" href="video-webpages/Lower-quality-videos/14. Darude Chairstorm.html">
+                <div class="contente">
+                    <img src="article/videos/thumbnails/Lower-quality-videos/14.jpg" alt="Darude Chairstorm (Darude Sandstorm YTPMV) Thumbnail" style="width:100%">
+                    <p class="thumb-title"><strong>Darude Chairstorm (Darude Sandstorm YTPMV)</strong><br>09.03.2017</p>
+                </div>
+                </a>
+            </div>
+            <div class="column">
+                <a class="thumb-title" href="video-webpages/Lower-quality-videos/13. The Basketball Bros..html">
+                <div class="contente">
+                    <img src="article/videos/thumbnails/Lower-quality-videos/13.jpg" alt="The Basketball Bros. Thumbnail" style="width:100%">
+                    <p class="thumb-title"><strong>The Basketball Bros.</strong><br>08.19.2017</p>
+                </div>
+                </a>
+            </div>
+            <div class="column">
+                <a class="thumb-title" href="video-webpages/Lower-quality-videos/10. How to Put Effects on Your Messages in iMessage!.html">
+                <div class="content">
+                    <img src="article/videos/thumbnails/Lower-quality-videos/10.jpg" alt="How to Put Effects on Your Messages in iMessage! Thumbnail" style="width:100%">
+                    <p class="thumb-title"><strong>How to Put Effects on Your Messages in iMessage!</strong><br>06.01.2017</p>
+                </div>
+                </a>
+            </div>
+            <div class="column">
+                <a class="thumb-title" href="video-webpages/Lower-quality-videos/06. Closest. Race. Ever.html">
+                <div class="contentc">
+                    <img src="article/videos/thumbnails/Lower-quality-videos/06.jpg" alt="Closest. Race. Ever. Thumbnail" style="width:100%">
+                    <p class="thumb-title"><strong>Closest. Race. Ever.</strong><br>02.13.2017</p>
+                </div>
+                </a>
+            </div>
+            <div class="column">
+                <a class="thumb-title" href="video-webpages/Lower-quality-videos/04. I can properly exit a room.html">
+                <div class="content">
+                    <img src="article/videos/thumbnails/Lower-quality-videos/04.jpg" alt="I can properly exit a room Thumbnail" style="width:100%">
+                    <p class="thumb-title"><strong>I can properly exit a room</strong><br>02.11.2017</p>
+                </div>
+                </a>
+            </div>
+        </div>
+        <h2 class="header">Other Videos</h2>
+        <div class = "row">
+            <div class="column">
+                <a class="thumb-title" href="video-webpages/Other videos/02. mmg4.html">
+                <div class="contentc">
+                    <img src="article/videos/thumbnails/mmg4.png" alt="otoMEDkulic | Mr. Mikulec Gaming 4 Thumbnail" style="width:100%">
+                    <p class="thumb-title"><span class="thumb-title"><strong>【Collab】otoMEDkulec ~mikulec gaming 4~</strong></span><br>04.13.2021</p>
+                </div>
+                </a>
+            </div>
+            <div class="column">
+                <a class="thumb-title" href="video-webpages/Other videos/01. LEAP Meme Review.html">
+                <div class="contente">
+                    <img src="article/videos/thumbnails/leap.png" alt="LEAP Meme Review Thumbnail" style="width:100%">
+                    <p class="thumb-title"><strong>LEAP Meme Review</strong><br>07.27.2019</p>
+                </div>
+                </a>
+            </div>
+        </div>
+    </main> <!-- #videos END -->
 
     <main id="about-me">
         <td colspan = "4" align = "left" valign = "top">

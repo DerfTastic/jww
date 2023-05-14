@@ -201,6 +201,132 @@ display: -webkit-box;
 
 #projects article #date p { margin: 0.5em; }
 
+#videos .header {
+	text-align: center;
+	font-size: 30px;
+	margin-right: auto;
+	margin-left: auto;
+	
+	position: relative;
+	z-index: 0;
+	border: 10px solid rgb(200, 200, 200);
+	border-radius: 10px;
+	background-color: rgb(200, 200, 200);
+}
+
+#videos .header:after {
+	margin: auto;
+	margin-top: 0px;
+	content: " ";
+	position: absolute;
+	z-index: -1;
+	left: 5px;
+	right: 5px;
+	bottom: 0px;
+	top: 0px;
+	border: 10px solid white;
+	border-radius: 10px;
+	background-color: white;
+}
+
+#videos .thumb-title {
+	width: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	
+	margin-top:2px;
+	margin-bottom:2px;
+	
+	text-decoration: none;
+	color: black;
+}
+
+#videos .thumb-title-c {
+	font-size: 0.6em;
+}
+
+#videos .thumb-title-c2 {
+	font-size: 0.8em;
+}
+
+/* Add padding BETWEEN each column (if you want) */
+#videos .row,
+#videos .row > .column {
+	padding: 8px;
+}
+  
+/* Create four equal columns that floats next to each other */
+#videos .column {
+	float: left;
+	width: 25%;
+}
+
+#videos .row {
+	background-color: rgb(200, 200, 200);
+	padding-top: 0px;
+	padding-bottom: 0px;
+	border-radius: 10px;
+}
+
+
+/* "<tag>2" tags are just used for "Featured Projects" on landing home page */
+#videos .row2 {
+	content: "";
+	display: table;
+	clear: both;
+}
+#videos .column2 {
+	float: left;
+	width: 100%;
+}
+/* end of "<tag>2" stuff
+
+
+/* Clear floats after rows */
+#videos .row:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+  
+/* Content */
+#videos .content {
+	background-color: white;
+	padding: 10px;
+	border-radius: 10px;
+}
+
+#videos .contente {
+	background-color: rgb(161, 255, 246);
+	padding: 10px;
+	border-radius: 10px;
+}
+
+#videos .contentc {
+	background-color: rgb(255, 190, 255);
+	padding: 10px;
+	border-radius: 10px;
+}
+
+#videos .content:hover, .contente:hover, .contentc:hover {
+	background-color: rgb(150, 255, 150);
+}
+  
+/* Responsive layout - makes a two column-layout instead of four columns */
+#videos @media screen and (max-width: 900px) {
+	.column {
+		width: 50%;
+	}
+}
+  
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+#videos @media screen and (max-width: 600px) {
+	.column {
+		width: 100%;
+	}
+}
+
 #about-me img { width: 100%; }
 
 /* RIGHT */
