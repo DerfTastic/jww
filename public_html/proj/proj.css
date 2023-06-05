@@ -1,0 +1,104 @@
+/* FONTS */
+
+@font-face {
+    font-family: "Liberation Sans";
+    src: url(/fonts/LiberationSans-Regular.ttf);
+}
+@font-face {
+    font-family: "Liberation Sans";
+    src: url(/fonts/LiberationSans-Bold.ttf);
+    font-weight: bold;
+}
+
+/* GENERAL */
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    font-family: "Liberation Sans";
+}
+
+body {
+    margin-top: 0px;
+}
+
+/* HEADER */
+
+header {
+    grid-column: 1 / 4;
+}
+
+header img#banner { 
+    display: block;
+    width: 100%;
+}
+
+header table {
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+header td {
+    width: 20%;
+    text-align: center;
+    white-space: nowrap;
+}
+
+header td button { 
+    width: 100%;
+    display: block;
+    padding: 0.5em;
+    font-size: 1em;
+
+    border: none;
+    color: black;
+    text-decoration: none;
+    text-overflow: ellipsis;
+}
+
+header td button:hover { 
+    box-shadow: inset 0 0 10px 5px black;
+}
+
+header #nav td:nth-of-type(1) button { background-color: #E31D98; }
+header #nav td:nth-of-type(2) button { background-color: #E31D1D; }
+header #nav td:nth-of-type(3) button { background-color: #FC8D0C; }
+header #nav td:nth-of-type(4) button { background-color: #EDF145; }
+header #nav td:nth-of-type(5) button { background-color: #4CF18D; }
+
+
+/* MAIN */
+
+main { }
+
+main img { width: 100%; }
+
+main#bbgameconsole img:hover {
+    color: #424242; 
+    -webkit-transition: all .3s ease-in;
+    -moz-transition: all .3s ease-in;
+    -ms-transition: all .3s ease-in;
+    -o-transition: all .3s ease-in;
+    transition: all .3s ease-in;
+    opacity: 1;
+    transform: scale(1.15);
+    -ms-transform: scale(1.15); /* IE 9 */
+    -webkit-transform: scale(1.15); /* Safari and Chrome */
+}
+
+
+/* RESPONSIVENESS */
+
+@media screen and (max-width: 600px) {
+    #buttons > * { margin: 15px; width: calc(50% - 30px); float: left; }
+}
+
+@media screen and (min-width: 1300px) {
+    body { width: 1280px; margin: 10px auto 10px auto; }
+}
+
+/* OTHER */
+
+li { 
+    list-style: inside;
+}

@@ -1,5 +1,5 @@
 /*
-    Jacob's Wacky World homepage
+    Jacob's Wacky World homepage CSS
 
     Since: December 16th, 2022
     By: Jacob Applebaum
@@ -8,16 +8,16 @@
 
 @font-face {
     font-family: "Liberation Sans";
-    src: url(fonts/LiberationSans-Regular.ttf);
+    src: url(/fonts/LiberationSans-Regular.ttf);
 }
 @font-face {
     font-family: "Liberation Sans";
-    src: url(fonts/LiberationSans-Bold.ttf);
+    src: url(/fonts/LiberationSans-Bold.ttf);
     font-weight: bold;
 }
 @font-face {
     font-family: "Comic Sans MS";
-    src: url(fonts/Comic_Sans_MS_Bold.ttf);
+    src: url(/fonts/Comic_Sans_MS_Bold.ttf);
 }
 
 /* GENERAL */
@@ -102,26 +102,36 @@ main {
 #projects a { text-decoration: none; }
 
 #projects article { 
-display: grid;
-         grid-template-areas:
-             "cat text img"
-             "cat date img";
-         grid-template-columns: 2em 1fr 30%;
-         grid-template-rows: 1fr auto;
+    display: grid;
+    grid-template-areas:
+        "cat text img"
+        "cat date img";
+    grid-template-columns: 2em 1fr 30%;
+    grid-template-rows: 1fr auto;
 
-width: calc(100% - 1rem);
-height: auto;
-color: white;
-       background-color: black;
-padding: 0 10px 0 0;
-         border-radius: 15px;
-border: 5px solid darkgrey;
-margin: 5px auto 10px auto;
+    padding: 0 10px 0 0;
+    color: white;
+    background-color: black;
+    border-radius: 15px;
+    border: 5px solid darkgrey;
 }
 
 #projects article:hover { 
     background-color: #424242; 
     text-shadow: 3px 3px 2px black;
+}
+
+#projects button.artbut {
+    width: calc(100% - 1rem);
+    height: auto;
+
+    background-color: transparent;
+    border: 0;
+    display: inline;
+    margin: 5px auto 10px auto;
+    padding: 0;
+    outline: none;
+    text-align: left;
 }
 
 #projects article #date { 
@@ -140,19 +150,25 @@ margin: 5px auto 10px auto;
 }
 
 :root {
+    --game-color:           darkred;
+    --science-color:        #976a00;
     --school-color:         darkblue;
     --electronics-color:    darkgreen;
-    --science-color:        #d9a323;
 }
 
+#projects div.game article          { border: 5px solid var(--game-color); }
 #projects div.school article        { border: 5px solid var(--school-color); }
 #projects div.electronics article   { border: 5px solid var(--electronics-color); }
 #projects div.science article       { border: 5px solid var(--science-color); }
 
+
+#projects div.game article:hover      { background-color: #520000; }
 #projects div.school article:hover      { background-color: #000052; }
 #projects div.electronics article:hover { background-color: #003200; }
 #projects div.science article:hover     { background-color: #323200; }
 
+#projects div.game #date,
+#projects div.game #cat        { background-color: var(--game-color); }
 #projects div.school #date,
 #projects div.school #cat      { background-color: var(--school-color); }
 #projects div.electronics #date,
@@ -393,5 +409,13 @@ footer {
 
 li { 
     list-style: inside;
+}
+
+/* INDIVIDUAL VIDEO PAGE (for video/index.php) */
+
+video {
+    width: 250px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.90);
+    text-align: center;
 }
 

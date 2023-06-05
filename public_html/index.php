@@ -16,7 +16,7 @@
 
     <!-- <meta http-equiv="refresh" content="5"/> -->
 
-    <link rel="stylesheet" href="style.css" type="text/css"/>
+    <link rel="stylesheet" href="/style.css" type="text/css"/>
     <link rel="icon" type="image/x-icon" href="favicon.ico"/>
 
     <script>
@@ -83,7 +83,7 @@
     <header>
         <table>
             <tr>
-                <td colspan = 5 ><img id="banner" src="images/top-banner.jpg" alt="top banner with jacob"></td>
+                <td colspan = 5 ><img id="banner" src="/images/top-banner.jpg" alt="top banner with jacob"></td>
             </tr>
 
             <form method="get">
@@ -111,10 +111,9 @@
     <main id="home">
 
         <p>Yooo what's good! My name's Jacob Applebaum and welcome to my site!</p>
-        <p>This is actually going to end up being a re-vamp to <a href="https://jacobswackyworld.ca">my current site</a> by the end of the semester, since I think it's long overdue for an update (almost 3 years).</p>
 
         <h2>Background</h2>
-        <p>Technically I've been "coding" since middle school, but it was really just HTML and Scratch (even though I'd consider the ladder more of a <i>programming language</i>). At that time I was more into <a href="https://jacobswackyworld.ca/videos">making and editing videos.</a></p>
+        <p>Technically I've been "coding" since middle school, but it was really just HTML and Scratch (even though I'd consider the ladder more of a <i>programming language</i>). At that time I was more into <a href="/index.php?p=videos">making and editing videos.</a></p>
         <p>In High School, I got into Python, Arduino-C, C#, Java, and JS on my own time. Then when I actually started taking Computer Science as a class I dove deeper into Java and Python, making games with a group of friends (artist, musician, and other programmer) over the summers, and I even made <a href="https://www.jacobswackyworld.ca/">my own website</a>.</p>
         <p>I also got more into hardware in high school. Arduinos, Raspberry Pis, basic circuits, robotics, etc. in Computer Engineering class. But outside of class, I stumbled upon <a href="https://eater.net">Ben Eater</a>'s videos, which finally made the connection between hardware and software 'click' in my head. And ever since, I've been really interested in the intersection between software and hardware.</p>
         <p>Now, I spend my days at Brock University, studying Computer Science. I'm learning more than ever before about software (in class) and hardware (mostly outside of class, if I have time). I'm enjoying residence for second year too, just because it was so fun last year. It makes me sad that I'll probably never live in that kind of ecosystem again... </p>
@@ -145,7 +144,6 @@
           </select>
         </form>
         </h3>
-        <br>
 
         <div id="list">
 
@@ -153,12 +151,18 @@
 /* error_reporting(E_ERROR|E_PARSE); */
 error_reporting(E_ALL);
 
-$plfile = fopen("article/proj-list.json", "r") or die("Unable to open the list of projects... ask jakey how he broke the site this time");
-$json = fread($plfile, filesize("article/proj-list.json"));
+$plfile = fopen("proj/proj-list.json", "r") or die("Unable to open the list of projects... ask jakey how he broke the site this time");
+$json = fread($plfile, filesize("proj/proj-list.json"));
 $obj = json_decode($json, true);
 
 foreach($obj as $id => $article) {
-    echo "<div id=\"".$id."\" class=\"".$article["Category"]."\" data-category=\"".$article["Category"]."\" data-date=\"".$article["Date"]."\"><a href=\"/\"><article>";
+    echo "<div id=\"".$id."\"
+    class=\"".$article["Category"]."\"
+    data-category=\"".$article["Category"]."\"
+    data-date=\"".$article["Date"]."\">
+    <form method=\"post\" action=\"/proj?id=".$id."\">
+        <button type=\"submit\" name=\"fromsite\" class=\"artbut\" value=\"woah\">
+        <article>";
 
     echo "<div id=\"cat\">";
         echo ucfirst($article["Category"]);
@@ -172,7 +176,10 @@ foreach($obj as $id => $article) {
 
     $datestr = getDateStr($article["Date"]);
     echo "<div id=date><p>".$datestr."</p></div>";
-    echo "</article></a></div>";
+    echo "</article>
+        </button>
+    </form>
+    </a></div>";
 }
 
 fclose($plfile);
@@ -276,105 +283,105 @@ function getDateStr($datestr) {
         <h2 class="header">School Videos</h2>
         <div class = "row">
             <div class="column">
-                <a class="thumb-title" href="video-webpages/School Videos/09. THE POWER OF JAKERS.html">
+                <a class="thumb-title" href="/video?t=THE POWER OF JAKERS">
                 <div class="content">
-                    <img src="article/videos/thumbnails/THE POWER OF JAKERS.png" alt="THE POWER OF JAKERS Thumbnail" style="width:100%">
+                    <img src="images/thumbnails/videos/THE POWER OF JAKERS.png" alt="THE POWER OF JAKERS Thumbnail" style="width:100%">
                     <p class="thumb-title"><strong>THE POWER OF JAKERS</strong><br>04.23.2021</p>
                 </div>
                 </a>
             </div>
             <div class="column">
-                <a class="thumb-title" href="video-webpages/School Videos/08. 一剪梅.html">
+                <a class="thumb-title" href="/video?t=一剪梅 | 动力学印刷">
                 <div class="content">
-                    <img src="article/videos/thumbnails/yijianmei.png" alt="一剪梅 Thumbnail" style="width:100%">
+                    <img src="images/thumbnails/videos/yijianmei.png" alt="一剪梅 Thumbnail" style="width:100%">
                     <p class="thumb-title"><span class="thumb-title-c2"><strong>一剪梅 | 动力学印刷</strong></span><br>04.05.2021</p>
                 </div>
                 </a>
             </div>
             <div class="column">
-                <a class="thumb-title" href="video-webpages/School Videos/07. Forced Success.html">
+                <a class="thumb-title" href="/video?t=Forced Success">
                 <div class="content">
-                    <img src="article/videos/thumbnails/forced-success.png" alt="Forced Success Thumbnail" style="width:100%">
+                    <img src="images/thumbnails/videos/forced-success.png" alt="Forced Success Thumbnail" style="width:100%">
                     <p class="thumb-title"><strong>Forced Success</strong><br>02.16.2021</p>
                 </div>
                 </a>
             </div>
             <div class="column">
-                <a class="thumb-title" href="video-webpages/School Videos/06. MCV4UP PT 2 Presentation on Derivatives - Copy.html">
+                <a class="thumb-title" href="/video?t=MCV4UP Performance Task Video %232: Presentation on Derivatives">
                 <div class="content">
-                    <img src="article/videos/thumbnails/calc-2.png" alt="MCV4UP PT #2: Presentation on Derivatives Thumbnail" style="width:100%">
+                    <img src="images/thumbnails/videos/calc-2.png" alt="MCV4UP PT #2: Presentation on Derivatives Thumbnail" style="width:100%">
                     <p class="thumb-title"><strong>MCV4UP PT #2: Presentation on Derivatives</strong><br>01.31.2021</p>
                 </div>
                 </a>
             </div>
             <div class="column">
-                <a class="thumb-title" href="video-webpages/School Videos/05. MCV4UP PT 1 Optimization Question.html">
+                <a class="thumb-title" href="/video?t=MCV4UP Performance Task Video %231: Optimization Question">
                 <div class="content">
-                    <img src="article/videos/thumbnails/calc-1.png" alt="MCV4UP PT #1: Optimization Question Thumbnail" style="width:100%">
+                    <img src="images/thumbnails/videos/calc-1.png" alt="MCV4UP PT #1: Optimization Question Thumbnail" style="width:100%">
                     <p class="thumb-title"><strong>MCV4UP PT #1: Optimization Question</strong><br>01.30.2021</p>
                 </div>
                 </a>
             </div>
             <div class="column">
-                <a class="thumb-title" href="video-webpages/31. jolly-jaunt.html">
+                <a class="thumb-title" href="/video?t=用務員遊び | A Jolly Jaunt with the Janitor">
                 <div class="contente">
-                    <img src="article/videos/thumbnails/clean-min.png" alt="A Jolly Jaunt with the Janitor Thumbnail" style="width:100%">
+                    <img src="images/thumbnails/videos/clean-min.png" alt="A Jolly Jaunt with the Janitor Thumbnail" style="width:100%">
                     <p class="thumb-title"><span class="thumb-title-c"><strong>用務員遊び | A Jolly Jaunt with the Janitor</strong></span><br>10.10.2019</p>
                 </div>
                 </a>
             </div>
             <div class="column">
-                <a class="thumb-title" href="video-webpages/School Videos/04. Billy Madison Scene Re-creation.html">
+                <a class="thumb-title" href="/video?t=Billy Madison Scene Re-creation - The Game Show Scene">
                 <div class="contente">
-                    <img src="article/videos/thumbnails/billy-madison.png" alt="Billy Madison Scene Re-creation Thumbnail" style="width:100%">
+                    <img src="images/thumbnails/videos/billy-madison.png" alt="Billy Madison Scene Re-creation Thumbnail" style="width:100%">
                     <p class="thumb-title"><strong>Billy Madison Scene Re-creation</strong><br>08.21.2019</p>
                 </div>
                 </a>
             </div>
             <div class="column">
-                <a class="thumb-title" href="video-webpages/School Videos/03. The Dramatic Devious Deadly Dump 2.html">
+                <a class="thumb-title" href="/video?t=The Dramatic Devious Deadly Dump 2">
                 <div class="contente">
-                    <img src="article/videos/thumbnails/ddd-dump-2.png" alt="The Dramatic Devious Deadly Dump 2" style="width:100%">
+                    <img src="images/thumbnails/videos/ddd-dump-2.png" alt="The Dramatic Devious Deadly Dump 2" style="width:100%">
                     <p class="thumb-title"><strong>The Dramatic Devious Deadly Dump 2</strong><br>06.19.2019</p>
                 </div>
                 </a>
             </div>
             <div class="column">
-                <a class="thumb-title" href="video-webpages/Lower-quality-videos/21. The DDD Dump.html">
+                <a class="thumb-title" href="/video?t=The Dramatic Devious Deadly Dump">
                 <div class="contente">
-                    <img src="article/videos/thumbnails/Lower-quality-videos/21.png" alt="The Dramatic Devious Deadly Dump" style="width:100%">
+                    <img src="images/thumbnails/videos/Lower-quality-videos/21.png" alt="The Dramatic Devious Deadly Dump" style="width:100%">
                     <p class="thumb-title"><strong>The Dramatic Devious Deadly Dump</strong><br>03.03.2019</p>
                 </div>
                 </a>
             </div>
             <div class="column">
-                <a class="thumb-title" href="video-webpages/School Videos/02. The Opponent of the Rodent.html">
+                <a class="thumb-title" href="/video?t=The Opponent of the Rodent">
                 <div class="contente">
-                    <img src="article/videos/thumbnails/rodent.png" alt="The Opponent of The Rodent Thumbnail" style="width:100%">
+                    <img src="images/thumbnails/videos/rodent.png" alt="The Opponent of The Rodent Thumbnail" style="width:100%">
                     <p class="thumb-title"><strong>The Opponent of the Rodent</strong><br>02.19.2019</p>
                 </div>
                 </a>
             </div>
             <div class="column">
-                <a class="thumb-title" href="video-webpages/25. Giuseppe's Operation.html">
+                <a class="thumb-title" href="/video?t=Giuseppe's Operation">
                 <div class="contente">
-                    <img src="article/videos/thumbnails/Guiseppe's Operation Video.png" alt="Giuseppe's Operation Thumbnail" style="width:100%">
+                    <img src="images/thumbnails/videos/Guiseppe's Operation Video.png" alt="Giuseppe's Operation Thumbnail" style="width:100%">
                     <p class="thumb-title"><strong>Giuseppe's Operation</strong><br>11.12.2018</p>
                 </div>
                 </a>
             </div>
             <div class="column">
-                <a class="thumb-title" href="video-webpages/School Videos/01. The Original Gameboy vs. The Nintendo Switch.html">
+                <a class="thumb-title" href="/video?t=The Original Gameboy vs. The Nintendo Switch">
                 <div class="content">
-                    <img src="article/videos/thumbnails/gameboy vs. switch.png" alt="The Original Gameboy vs. The Nintendo Switch Thumbnail" style="width:100%">
+                    <img src="images/thumbnails/videos/gameboy vs. switch.png" alt="The Original Gameboy vs. The Nintendo Switch Thumbnail" style="width:100%">
                     <p class="thumb-title"><strong>The Original Gameboy vs. The Nintendo Switch</strong><br>04.13.2018</p>
                 </div>
                 </a>
             </div>
             <div class="column">
-                <a class="thumb-title" href="video-webpages/Lower-quality-videos/18. Carpooling.html">
+                <a class="thumb-title" href="/video?t=How Carpooling can reduce your ecological footprint | School Video">
                 <div class="contente">
-                    <img src="article/videos/thumbnails/Lower-quality-videos/18.jpg" alt="How Carpooling can reduce your ecological footprint | School Video Thumbnail" style="width:100%">
+                    <img src="images/thumbnails/videos/Lower-quality-videos/18.jpg" alt="How Carpooling can reduce your ecological footprint | School Video Thumbnail" style="width:100%">
                     <p class="thumb-title"><strong>How Carpooling can reduce your ecological footprint | School Video</strong><br>03.28.2018</p>
                 </div>
                 </a>
@@ -383,65 +390,65 @@ function getDateStr($datestr) {
         <h2 class="header">Old videos</h2>
         <div class = "row">
             <div class="column">
-                <a class="thumb-title" href="video-webpages/16. Cringey-Kids-Trying-To-Be-Funny.html">
+                <a class="thumb-title" href="/video?t=Cringey Kids Trying to be Funny">
                 <div class="contente">
-                    <img src="article/videos/thumbnails/cringey-kids-trying-to-be-funny - Copy.png" alt="Cringey Kids Trying to be Funny Thumbnail" style="width:100%">
+                    <img src="images/thumbnails/videos/cringey-kids-trying-to-be-funny - Copy.png" alt="Cringey Kids Trying to be Funny Thumbnail" style="width:100%">
                     <p class="thumb-title"><strong>Cringey Kids Trying to be Funny</strong><br>08.30.2017</p>
                 </div>
                 </a>
             </div>
             <div class="column">
-                <a class="thumb-title" href="video-webpages/14. The-Safety-Kids-Club.html">
+                <a class="thumb-title" href="/video?t=The Safety Kids Club">
                 <div class="contente">
-                    <img src="article/videos/thumbnails/the-safety-kids-club-thumbnail - Copy.png" alt="The Safety Kids Club Thumbnail" style="width:100%">
+                    <img src="images/thumbnails/videos/the-safety-kids-club-thumbnail - Copy.png" alt="The Safety Kids Club Thumbnail" style="width:100%">
                     <p class="thumb-title"><strong>The Safety Kids Club</strong><br>08.20.2017</p>
                 </div>
                 </a>
             </div>
             <div class="column">
-                <a class="thumb-title" href="video-webpages/09. Playing-old-games-with-ben.html">
+                <a class="thumb-title" href="/video?t=Playing Old Games - With Ben!">
                 <div class="contente">
-                    <img src="article/videos/thumbnails/playing-old-games-with-ben-thumbnail - Copy.png" alt="Playing Old Games - With Ben! Thumbnail" style="width:100%">
+                    <img src="images/thumbnails/videos/playing-old-games-with-ben-thumbnail - Copy.png" alt="Playing Old Games - With Ben! Thumbnail" style="width:100%">
                     <p class="thumb-title"><strong>Playing Old Games - With Ben!</strong><br>02.26.2017</p>
                 </div>
                 </a>
             </div>
             <div class="column">
-                <a class="thumb-title" href="video-webpages/08. What-the-gamecube-handle-really-does.html">
+                <a class="thumb-title" href="/video?t=What the Gamecube Handle Really Does">
                 <div class="content">
-                    <img src="article/videos/thumbnails/what-the-gamecube-handle-does-thumbnail - Copy.png" alt="What the Gamecube Handle Really Does Thumbnail" style="width:100%">
+                    <img src="images/thumbnails/videos/what-the-gamecube-handle-does-thumbnail - Copy.png" alt="What the Gamecube Handle Really Does Thumbnail" style="width:100%">
                     <p class="thumb-title"><strong>What the Gamecube Handle Really Does</strong><br>02.06.2017</p>
                 </div>
                 </a>
             </div>
             <div class="column">
-                <a class="thumb-title" href="video-webpages/07. Failing at Solving Rubik's Cubes.html">
+                <a class="thumb-title" href="/video?t=Failing at Solving Rubik's Cubes">
                 <div class="content">
-                    <img src="article/videos/thumbnails/failing-at-solving-rubiks-cubes-thumbnail.png" alt="Failing at Solving Rubik's Cubes Thumbnail" style="width:100%">
+                    <img src="images/thumbnails/videos/failing-at-solving-rubiks-cubes-thumbnail.png" alt="Failing at Solving Rubik's Cubes Thumbnail" style="width:100%">
                     <p class="thumb-title"><strong>Failing at Solving Rubik's Cubes</strong><br>01.27.2017</p>
                 </div>
                 </a>
             </div>
             <div class="column">
-                <a class="thumb-title" href="video-webpages/05. The-DS-Curse.html">
+                <a class="thumb-title" href="/video?t=The DS Curse">
                 <div class="content">
-                    <img src="article/videos/thumbnails/the-ds-curse - Copy.png" alt="The DS Curse Thumbnail" style="width:100%">
+                    <img src="images/thumbnails/videos/the-ds-curse - Copy.png" alt="The DS Curse Thumbnail" style="width:100%">
                     <p class="thumb-title"><strong>The DS Curse</strong><br>12.19.2016</p>
                 </div>
                 </a>
             </div>
             <div class="column">
-                <a class="thumb-title" href="video-webpages/04. Summation-Notation-and-Halloween-Evolution.html">
+                <a class="thumb-title" href="/video?t=Summation Notation and Halloween Evolution">
                 <div class="content">
-                    <img src="article/videos/thumbnails/summation-notation - Copy.png" alt="Summation Notation and Halloween Evolution Thumbnail" style="width:100%">
+                    <img src="images/thumbnails/videos/summation-notation - Copy.png" alt="Summation Notation and Halloween Evolution Thumbnail" style="width:100%">
                     <p class="thumb-title"><strong>Summation Notation and Halloween Evolution</strong><br>11.22.2016</p>
                 </div>
                 </a>
             </div>
             <div class="column">
-                <a class="thumb-title" href="video-webpages/03. My Biased-Thoughts-on-Nintendo.html">
+                <a class="thumb-title" href="/video?t=My Biased Thoughts on Nintendo">
                 <div class="content">
-                    <img src="article/videos/thumbnails/my-biased-thoughts-on-nintendo-thumbnail - Copy.png" alt="My Biased Thoughts on Nintendo Thumbnail" style="width:100%">
+                    <img src="images/thumbnails/videos/my-biased-thoughts-on-nintendo-thumbnail - Copy.png" alt="My Biased Thoughts on Nintendo Thumbnail" style="width:100%">
                     <p class="thumb-title"><strong>My Biased Thoughts on Nintendo</strong><br>10.12.2016</p>
                 </div>
                 </a>
@@ -450,49 +457,49 @@ function getDateStr($datestr) {
         <h2 class="header">Old and Low-quality videos</h2>
         <div class = "row">
             <div class="column">
-                <a class="thumb-title" href="video-webpages/Lower-quality-videos/20. I just cut the cheese.html">
+                <a class="thumb-title" href="/video?t=I just cut the cheese">
                 <div class="content">
-                    <img src="article/videos/thumbnails/Lower-quality-videos/20.jpg" alt="I just cut the cheese Thumbnail" style="width:100%">
+                    <img src="images/thumbnails/videos/Lower-quality-videos/20.jpg" alt="I just cut the cheese Thumbnail" style="width:100%">
                     <p class="thumb-title"><strong>I just cut the cheese</strong><br>01.31.2019</p>
                 </div>
                 </a>
             </div>
             <div class="column">
-                <a class="thumb-title" href="video-webpages/Lower-quality-videos/14. Darude Chairstorm.html">
+                <a class="thumb-title" href="/video?t=Darude Chairstorm (Darude Sandstorm YTPMV)">
                 <div class="contente">
-                    <img src="article/videos/thumbnails/Lower-quality-videos/14.jpg" alt="Darude Chairstorm (Darude Sandstorm YTPMV) Thumbnail" style="width:100%">
+                    <img src="images/thumbnails/videos/Lower-quality-videos/14.jpg" alt="Darude Chairstorm (Darude Sandstorm YTPMV) Thumbnail" style="width:100%">
                     <p class="thumb-title"><strong>Darude Chairstorm (Darude Sandstorm YTPMV)</strong><br>09.03.2017</p>
                 </div>
                 </a>
             </div>
             <div class="column">
-                <a class="thumb-title" href="video-webpages/Lower-quality-videos/13. The Basketball Bros..html">
+                <a class="thumb-title" href="/video?t=The Basketball Bros.">
                 <div class="contente">
-                    <img src="article/videos/thumbnails/Lower-quality-videos/13.jpg" alt="The Basketball Bros. Thumbnail" style="width:100%">
+                    <img src="images/thumbnails/videos/Lower-quality-videos/13.jpg" alt="The Basketball Bros. Thumbnail" style="width:100%">
                     <p class="thumb-title"><strong>The Basketball Bros.</strong><br>08.19.2017</p>
                 </div>
                 </a>
             </div>
             <div class="column">
-                <a class="thumb-title" href="video-webpages/Lower-quality-videos/10. How to Put Effects on Your Messages in iMessage!.html">
+                <a class="thumb-title" href="/video?t=How to Put Effects on Your Messages in iMessage!">
                 <div class="content">
-                    <img src="article/videos/thumbnails/Lower-quality-videos/10.jpg" alt="How to Put Effects on Your Messages in iMessage! Thumbnail" style="width:100%">
+                    <img src="images/thumbnails/videos/Lower-quality-videos/10.jpg" alt="How to Put Effects on Your Messages in iMessage! Thumbnail" style="width:100%">
                     <p class="thumb-title"><strong>How to Put Effects on Your Messages in iMessage!</strong><br>06.01.2017</p>
                 </div>
                 </a>
             </div>
             <div class="column">
-                <a class="thumb-title" href="video-webpages/Lower-quality-videos/06. Closest. Race. Ever.html">
+                <a class="thumb-title" href="/video?t=Closest. Race. Ever.">
                 <div class="contentc">
-                    <img src="article/videos/thumbnails/Lower-quality-videos/06.jpg" alt="Closest. Race. Ever. Thumbnail" style="width:100%">
+                    <img src="images/thumbnails/videos/Lower-quality-videos/06.jpg" alt="Closest. Race. Ever. Thumbnail" style="width:100%">
                     <p class="thumb-title"><strong>Closest. Race. Ever.</strong><br>02.13.2017</p>
                 </div>
                 </a>
             </div>
             <div class="column">
-                <a class="thumb-title" href="video-webpages/Lower-quality-videos/04. I can properly exit a room.html">
+                <a class="thumb-title" href="/video?t=I can properly exit a room">
                 <div class="content">
-                    <img src="article/videos/thumbnails/Lower-quality-videos/04.jpg" alt="I can properly exit a room Thumbnail" style="width:100%">
+                    <img src="images/thumbnails/videos/Lower-quality-videos/04.jpg" alt="I can properly exit a room Thumbnail" style="width:100%">
                     <p class="thumb-title"><strong>I can properly exit a room</strong><br>02.11.2017</p>
                 </div>
                 </a>
@@ -501,17 +508,17 @@ function getDateStr($datestr) {
         <h2 class="header">Other Videos</h2>
         <div class = "row">
             <div class="column">
-                <a class="thumb-title" href="video-webpages/Other videos/02. mmg4.html">
+                <a class="thumb-title" href="/video?t=【Collab】otoMEDkulec ~mikulec gaming 4~">
                 <div class="contentc">
-                    <img src="article/videos/thumbnails/mmg4.png" alt="otoMEDkulic | Mr. Mikulec Gaming 4 Thumbnail" style="width:100%">
+                    <img src="images/thumbnails/videos/mmg4.png" alt="otoMEDkulic | Mr. Mikulec Gaming 4 Thumbnail" style="width:100%">
                     <p class="thumb-title"><span class="thumb-title"><strong>【Collab】otoMEDkulec ~mikulec gaming 4~</strong></span><br>04.13.2021</p>
                 </div>
                 </a>
             </div>
             <div class="column">
-                <a class="thumb-title" href="video-webpages/Other videos/01. LEAP Meme Review.html">
+                <a class="thumb-title" href="/video?t=LEAP Meme Review">
                 <div class="contente">
-                    <img src="article/videos/thumbnails/leap.png" alt="LEAP Meme Review Thumbnail" style="width:100%">
+                    <img src="images/thumbnails/videos/leap.png" alt="LEAP Meme Review Thumbnail" style="width:100%">
                     <p class="thumb-title"><strong>LEAP Meme Review</strong><br>07.27.2019</p>
                 </div>
                 </a>
@@ -542,9 +549,11 @@ function getDateStr($datestr) {
         <iframe src="files/resume.pdf" width="100%" height="900px"></iframe>
     </main> <!-- #resume END -->
 
+    <!--
     <footer>
         <button class="smallb" onclick="delete_acc()">Delete Account</button>
     </footer>
+    -->
 
     <script>
 

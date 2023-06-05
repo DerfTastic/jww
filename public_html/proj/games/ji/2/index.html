@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel="stylesheet" type="text/css" href="TemplateData/style.css">
+    <title>Joacob Invader 2!!!!!!!!!!!!!!!!!!!11</title>
+  </head>
+  <body style="text-align: center">
+	<h1><b>Jaocb INvaders 2<span style="font-size: 20px;">(two)(stylized as '2')</span> (lesgo!!!)</b></h1>
+	<p>There is A WHOLE ONE <span style="font-size: 20px;">(1)(stylized as 'one')</span> SURPRISE IN THE GAME. Can you find them all???!!! post suggestions in JWW Discord Server</p>
+    <canvas id="unity-canvas" style="width: 960px; height: 600px; background: url('Build/WebGL.jpg') center / cover"></canvas>
+    <script src="Build/WebGL.loader.js"></script>
+    <script>
+      createUnityInstance(document.querySelector("#unity-canvas"), {
+        dataUrl: "Build/WebGL.data",
+        frameworkUrl: "Build/WebGL.framework.js",
+        codeUrl: "Build/WebGL.wasm",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "Wacky World Inc.",
+        productName: "Jacob's First Project",
+        productVersion: "1.0",
+      });
+    </script>
+  </body>
+</html>
