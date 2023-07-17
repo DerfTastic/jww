@@ -1,6 +1,7 @@
 <?php
-// error_reporting(E_ERROR | E_PARSE);
-error_reporting(E_ALL);
+error_reporting(E_ERROR | E_PARSE);
+
+require_once("../php-code/makeDefaultPage.php");
 
 // var_dump($_POST);
 // var_dump($_GET);
@@ -9,24 +10,6 @@ if (array_key_exists('id', $_GET)) {
     $get_id = $_GET['id'];
     $doc = new DOMDocument();
     $filepath = "pages/".$get_id.".html";
-
-// HEADER 
-    $headersrc = <<<HEADERSRC
-    <header> 
-    <table> 
-    <tr> <td colspan = 5 ><img id="banner" src="/images/top-banner.jpg" alt="top banner with jacob"></td> </tr> 
-    <form method="get" action="/"> 
-    <tr id="nav"> 
-    <td> <button type="submit" name="p" value="home"> <b>HOME</b> </button> </td> 
-    <td> <button type="submit" name="p" value="projects"> <b>PROJECTS</b> </button> </td> 
-    <td> <button type="submit" name="p" value="videos"> <b>VIDEOS</b> </button> </td> 
-    <td> <button type="submit" name="p" value="about-me"> <b>ABOUT ME</b> </button> </td> 
-    <td> <button type="submit" name="p" value="resume"> <b>RESUME</b> </button> </td> 
-    </tr>
-    </form> 
-    </table>
-    </header>
-    HEADERSRC;
 
     if (file_exists($filepath)) {
         try {
@@ -57,6 +40,7 @@ if (array_key_exists('id', $_GET)) {
                 // $combineddoc->documentElement->appendChild($headerele); */
 
             }
+
             echo $doc->saveHTML();
         }
         catch (Exception $e) {
@@ -64,61 +48,13 @@ if (array_key_exists('id', $_GET)) {
         }
     }
     else {
-
-        // DEFAULT ARTICLE PAGE TOP HALF   (if not custom page is found)
-        echo <<<MSG
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <link rel="stylesheet" href="/proj/proj.css" type="text/css"/>
-        </head>
-        <body>
-        $headersrc
-        <main id="$get_id">
-        MSG;
-
-        $plfile = fopen("proj-list.json", "r") or die("Unable to open the list of projects... ask jakey how he broke the site this time");
-        $json = fread($plfile, filesize("proj-list.json"));
-        $pl = json_decode($json, true);
-        $obj = $pl[$get_id];
-
-        echo "<h1>".$obj["Name"]."</h1>";
-        echo "<h3><i>".$obj["Date"]."</i></h3>";
-        echo "<p>".$obj["Desc"]."</p>";
-
-        $imgfolder = "../images/proj-img/".$get_id;
-
-        if (file_exists($imgfolder)) { // If a project image folder actually exists
-
-            foreach (new DirectoryIterator($imgfolder) as $file) {
-                if ($file->isDot()) continue;
-                $filename = $file->getFilename();
-                echo "<img width=\"400px\" src=\"".$imgfolder."/".$filename."\" alt=\"".$filename."\"><br>";
-            }
-
-        }
-        else {
-            echo "<img src=\"/images/thumbnails/".$get_id.".png\"><br>";
-            echo "<p>Uh oh... jakey hasn't added any more content here...</p>";
-            echo "<p>I guess you were expecting more content than what was on the list of projects, huh.</p>";
-            echo "<p>Don't fret, if you're curious about this project, just ask jakey himself!</p>";
-
-        }
-
-
-
-        // DEFAULT ARTICLE PAGE BOTTOM HALF
-        echo <<<MSG
-        </main>
-        </body>
-        </html>
-        MSG;
-
+        echo makeDefaultPage($get_id)->saveHTML();
     }
 }
 else {
     redirect();
 }
+
 
 
 function redirect($errmsg = null) {

@@ -18,7 +18,12 @@
     font-family: "Liberation Sans";
 }
 
+html {
+    background-image: url("/images/jacob.jpg");
+}
+
 body {
+    background-color: white;
     margin-top: 0px;
 }
 
@@ -69,9 +74,16 @@ header #nav td:nth-of-type(5) button { background-color: #4CF18D; }
 
 /* MAIN */
 
-main { }
+main {
+    padding: 10px;
+}
 
-main img { width: 100%; }
+main img { 
+    height: 50%;
+    display: inline-block;
+    margin: 5px;
+    border: 2px solid black;
+}
 
 main#bbgameconsole img:hover {
     color: #424242; 
