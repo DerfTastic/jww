@@ -8,13 +8,41 @@ error_reporting(E_ALL);
 require_once("../php-code/makeDefaultPage.php");
 
 function showFiles($path, $ol = false) {
-    echo $ol ? "<ol>" : "<ul>";
-    foreach (new DirectoryIterator($path) as $file) {
-        if ($file->isDot()) continue;
-        $filename = $file->getFilename();
-        echo "<li><a href=\"".$path.($path[strlen($path)-1] == '/' ? "" : "/" ).$filename."\">".$filename."</a></li>";
+    try
+    {
+        if (is_dir($path))
+        {
+            $dI = new DirectoryIterator($path);
+
+            echo $ol ? "<ol>" : "<ul>";
+            foreach ($dI as $file) {
+                if ($file->isDot()) continue;
+                $filename = $file->getFilename();
+                echo "<li><a href=\"".$path.($path[strlen($path)-1] == '/' ? "" : "/" ).$filename."\">".$filename."</a></li>";
+            }
+            echo $ol ? "</ol>" : "</ul>";
+        }
+        else if (is_file($path)) {
+            $filepath = $path;
+            $dI = new DirectoryIterator(dirname($filepath));
+
+            echo $ol ? "<ol>" : "<ul>";
+            foreach ($dI as $file) {
+                if ($file->isDot()) continue;
+                $filename = $file->getFilename();
+                echo "<li><a href=\"$filepath\">".$filename."</a></li>";
+            }
+            echo $ol ? "</ol>" : "</ul>";
+        }
+        else 
+        { 
+            throw new Exception("Well I don't know what this so called \"&dollar;path\" really is anymore");
+        }
     }
-    echo $ol ? "</ol>" : "</ul>";
+    catch (Exception $e)
+    {
+        echo "<span style=\"color:red;\"><b>Probably wasn't able to construct a DirectoryIterator object for the path ".$path." (it won't work if it isn't a directory).</b><br><br>".$e->getMessage()."</span>";
+    }
 }
 
 function showImgs($path, $ol = false) {
@@ -232,7 +260,10 @@ else if (isset($_POST["enteredID"]))
             echo json_encode($obj);
             echo "<p style=\"color:green;\">It does exist here!</p>";
         }
+        else
+        {
             echo "<p style=\"color:red;\">Doesn't exist! <br><br>Use the <span class=\"boxInline\" style=\"background-color: #BA68C8;\">Purple</span> box to add a new entry to /proj/proj-list.json</p>";
+        }
 
 
         echo "<h3>/proj/pages/<span style=\"color:blue;\">".$_POST["id"].".html</span></h3>";
