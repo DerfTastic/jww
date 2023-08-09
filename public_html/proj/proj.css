@@ -85,6 +85,7 @@ main img {
     border: 2px solid black;
 }
 
+/*
 main#bbgameconsole img:hover {
     color: #424242; 
     -webkit-transition: all .3s ease-in;
@@ -94,9 +95,10 @@ main#bbgameconsole img:hover {
     transition: all .3s ease-in;
     opacity: 1;
     transform: scale(1.15);
-    -ms-transform: scale(1.15); /* IE 9 */
-    -webkit-transform: scale(1.15); /* Safari and Chrome */
+    -ms-transform: scale(1.15); 
+    -webkit-transform: scale(1.15); 
 }
+*/
 
 
 /* RESPONSIVENESS */

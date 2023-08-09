@@ -7,54 +7,6 @@
 error_reporting(E_ALL);
 require_once("../php-code/makeDefaultPage.php");
 
-function showFiles($path, $ol = false) {
-    try
-    {
-        if (is_dir($path))
-        {
-            $dI = new DirectoryIterator($path);
-
-            echo $ol ? "<ol>" : "<ul>";
-            foreach ($dI as $file) {
-                if ($file->isDot()) continue;
-                $filename = $file->getFilename();
-                echo "<li><a href=\"".$path.($path[strlen($path)-1] == '/' ? "" : "/" ).$filename."\">".$filename."</a></li>";
-            }
-            echo $ol ? "</ol>" : "</ul>";
-        }
-        else if (is_file($path)) {
-            $filepath = $path;
-            $dI = new DirectoryIterator(dirname($filepath));
-
-            echo $ol ? "<ol>" : "<ul>";
-            foreach ($dI as $file) {
-                if ($file->isDot()) continue;
-                $filename = $file->getFilename();
-                echo "<li><a href=\"$filepath\">".$filename."</a></li>";
-            }
-            echo $ol ? "</ol>" : "</ul>";
-        }
-        else 
-        { 
-            throw new Exception("Well I don't know what this so called \"&dollar;path\" really is anymore");
-        }
-    }
-    catch (Exception $e)
-    {
-        echo "<span style=\"color:red;\"><b>Probably wasn't able to construct a DirectoryIterator object for the path ".$path." (it won't work if it isn't a directory).</b><br><br>".$e->getMessage()."</span>";
-    }
-}
-
-function showImgs($path, $ol = false) {
-    echo $ol ? "<ol>" : "<ul>";
-    foreach (new DirectoryIterator($path) as $file) {
-        if ($file->isDot()) continue;
-        $filename = $file->getFilename();
-        $filepath = $path."/".$filename;
-        echo "<li><a href=\"".$filepath."\">".$filename."<img height=\"100px\" alt=\" [noooo, file can't be displayed] \" src=".$filepath."></a></li>";
-    }
-    echo $ol ? "</ol>" : "</ul>";
-}
 ?>
 
 <html>
@@ -86,6 +38,7 @@ function showImgs($path, $ol = false) {
   Type a project id:
   <input type="text" name="id" id="id" oninput="destChange()" value="<?php if(isset($_POST['id'])) echo $_POST['id'];?>">
   <input type="submit" value="View ID Directories" name="enteredID">
+  <p style="font-size: 12px">(You can just click "View ID Directories" without inputting anything to just show all id's in proj/proj-list.json)</p>
 </form>
 </div>
 
@@ -271,7 +224,7 @@ else if (isset($_POST["enteredID"]))
 
         $pagePath = "../proj/pages/".$_POST["id"].".html";
 
-        echo "<p><u><b>Its contents:</b></u> <span style=\"color:red;\">(There will be a corresponding warning if it's empty or invalid syntax in the file)</span></p>";
+        echo "<p><u><b>Its contents:</b></u> (There will be a corresponding warning if it's empty or invalid syntax in the file)</p>";
         $dummydoc = new DOMDocument();
         $status = $dummydoc->loadHTMLFile($pagePath);
         echo "<code>".htmlspecialchars($dummydoc->saveHTML(), 0)."</code>";
@@ -286,7 +239,18 @@ else if (isset($_POST["enteredID"]))
         }
     }
     else {
-        echo "<p>ok, well you have type an id name at least.</p>";
+        // echo "<p>ok, well you have to type an id name at least.</p>";
+
+        $json = file_get_contents('../proj/proj-list.json') or die("Unable to project list file...");
+        $pl = json_decode($json, true) or die("Unable to decode project list json...");
+
+        echo "<p><b><u>List of all currently registered id's in <a href=\"../proj/proj-list.json\" target=\"_blank\">proj/proj-list.json</a>:</u></b></p>";
+        echo "<ul>";
+        foreach ($pl as $entryID => $entry) {
+            echo "<li>".$entryID."</li>";
+        }
+        echo "</ul>";
+        
     }
 }
 else if (isset($_POST["uploadedPic"])) 
@@ -371,7 +335,9 @@ else if (isset($_POST["convertHTML"]))
         {
             $canonPath = realpath($defaultPath);
             if (is_writable($canonPath))
+            {
                 unlink($canonPath) or die("ok wtf, deleting didn't work");
+            }
         }
 
         if (!file_exists($defaultPath))
@@ -425,6 +391,9 @@ else if (isset($_POST['jsonAdded']))
     }
 }
 
+/** Makes a new entry in proj/proj-list.json.
+ *  Assumes this was called after $_POST variables were received with the information of the new Json entry to be created
+ */
 function addJson() {
 
     $json = file_get_contents('../proj/proj-list.json') or die("Unable to project list file...");
@@ -454,6 +423,9 @@ function addJson() {
     // Add new object to json
     $pl[$_POST['json-id']] = $newEntry;
 
+    // Sort the array by its keys
+    ksort($pl);
+
     $updatedJsonStr = json_encode($pl, JSON_PRETTY_PRINT) or die("Unable to encode new project list json...");
     file_put_contents('../proj/proj-list.json', $updatedJsonStr);
 
@@ -478,6 +450,60 @@ function checkPOST() {
     }
 
     return false;
+}
+
+function showFiles($path, $ol = false) {
+    try
+    {
+        if (is_dir($path))
+        {
+            $dI = new DirectoryIterator($path);
+
+            echo $ol ? "<ol>" : "<ul>";
+            foreach ($dI as $file) {
+                if ($file->isDot()) continue;
+                $filename = $file->getFilename();
+                echo "<li><a href=\"".$path.($path[strlen($path)-1] == '/' ? "" : "/" ).$filename."\">".$filename."</a></li>";
+            }
+            echo $ol ? "</ol>" : "</ul>";
+        }
+        else if (is_file($path)) {
+            $dI = new DirectoryIterator(dirname($path));
+
+            echo $ol ? "<ol>" : "<ul>";
+            foreach ($dI as $file) {
+                if ($file->isDot()) continue;
+                $filename = $file->getFilename(); // Listening to Meltphace 6 - Aphex Twin while writing this on the train into Toronto rn
+                $filepath = $file->getPathname();
+                $isThisFile = $filepath === $path;
+                echo "<li>";
+                if ($isThisFile) echo "<span style=\"display: inline-block;padding: 3px; border: 2px solid forestgreen; background-color: lightgreen;\">";
+                echo "<a href=\"$filepath\">".$filename."</a>";
+                if ($isThisFile) echo "</span>";
+                echo "</li>";
+            }
+            echo $ol ? "</ol>" : "</ul>";
+        }
+        else 
+        { 
+            throw new Exception("Well I don't know what this so called \"&dollar;path\" really is anymore");
+        }
+    }
+    catch (Exception $e)
+    {
+        echo "<span style=\"color:red;\"><b>Probably wasn't able to construct a DirectoryIterator object for the path ".$path." (it won't work if it isn't a directory).</b><br><br>".$e->getMessage()."</span>";
+    }
+}
+
+function showImgs($path, $ol = false) {
+    echo $ol ? "<ol>" : "<ul>";
+    foreach (new DirectoryIterator($path) as $file) {
+        if ($file->isDot()) continue;
+        $filename = $file->getFilename();
+        $filepath = $path."/".$filename;
+        echo "<li><a href=\"".$filepath."\">".$filename."<img height=\"100px\" alt=\" [noooo, file can't be displayed] \" src=".$filepath."></a></li>";
+    }
+    echo $ol ? "</ol>" : "</ul>";
 }
 
 echo "</div>";
